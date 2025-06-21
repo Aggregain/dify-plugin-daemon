@@ -253,9 +253,9 @@ func (s *DifyServer) onMessage(runtime *RemotePluginRuntime, message []byte) {
 				buffer = runtime.assets[assetChunk.Filename]
 			}
 
-			// allows at most 50MB assets
-			if runtime.assetsBytes+int64(len(assetChunk.Data)) > 50*1024*1024 {
-				closeConn([]byte("assets too large, at most 50MB\n"))
+			// allows at most 5GB assets
+			if runtime.assetsBytes+int64(len(assetChunk.Data)) > 5*1024*1024*1024 {
+				closeConn([]byte("assets too large, at most 5GB\n"))
 				return
 			}
 
