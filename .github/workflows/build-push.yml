@@ -19,7 +19,7 @@ env:
   REGISTRY: ghcr.io
   CICD_ACTOR: ${{ secrets.CICD_ACTOR }}
   CICD_TOKEN: ${{ secrets.CICD_TOKEN }}
-  DIFY_DAEMON_IMAGE_NAME: ${{ vars.DIFY_DAEMON_IMAGE_NAME || 'Aggregain/dify-plugin-daemon' }}
+  DIFY_DAEMON_IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   matrix_prepare:
