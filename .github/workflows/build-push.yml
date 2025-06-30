@@ -80,7 +80,7 @@ jobs:
 
 
       - name: Run Build Docker Image
-        run: docker build --build-arg PLATFORM=${{ matrix.scope }} --build-arg VERSION=${{ github.sha }} -t ${{ steps.meta.outputs.tags }}-${{steps.short-sha.outputs.sha}} -f ./docker/${{ matrix.scope }}.dockerfile .
+        run: docker build --build-arg PLATFORM=${{ matrix.scope }} --build-arg VERSION=${{ github.sha }} -t ${{ github.repository }}-${{steps.short-sha.outputs.sha}} -f ./docker/${{ matrix.scope }}.dockerfile .
 
       - name: Push Docker Image
         if: github.event_name != 'pull_request'
