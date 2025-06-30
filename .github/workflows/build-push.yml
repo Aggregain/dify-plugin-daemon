@@ -80,11 +80,11 @@ jobs:
 
 
       - name: Run Build Docker Image
-        run: docker build --build-arg PLATFORM=${{ matrix.scope }} --build-arg VERSION=${{ github.sha }} -t ghcr.io/${{ github.repository }}:main-${{steps.short-sha.outputs.sha}} -f ./docker/${{ matrix.scope }}.dockerfile .
+        run: docker build --build-arg PLATFORM=${{ matrix.scope }} --build-arg VERSION=${{ github.sha }} -t ghcr.io/aggregain/dify-plugin-daemon:main-${{steps.short-sha.outputs.sha}} -f ./docker/${{ matrix.scope }}.dockerfile .
 
       - name: Push Docker Image
         if: github.event_name != 'pull_request'
         run: for tag in $(echo "${{ steps.meta.outputs.tags }}" | tr ',' '\n');
           do
-          docker push ghcr.io/${{ github.repository }}:main-${{steps.short-sha.outputs.sha}};
+          docker push ghcr.io/aggregain/dify-plugin-daemon:main-${{steps.short-sha.outputs.sha}};
           done
