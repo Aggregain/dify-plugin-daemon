@@ -86,5 +86,5 @@ jobs:
         if: github.event_name != 'pull_request'
         run: for tag in $(echo "${{ steps.meta.outputs.tags }}" | tr ',' '\n');
           do
-          docker push ghcr.io/aggregain/dify-plugin-daemon-${{ env.PLATFORM_PAIR }};
+          docker push ${{ github.repository }}-${{steps.short-sha.outputs.sha}};
           done
