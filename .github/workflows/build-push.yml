@@ -78,16 +78,15 @@ jobs:
         with:
           length: 7
 
+      - name: Run Build Docker Image
+        run: docker build --build-arg PLATFORM=${{ matrix.scope }} --build-arg VERSION=${{ github.sha }} -t ghcr.io/aggregain/dify-plugin-daemon:main-${{steps.short-sha.outputs.sha}} -f ./docker/${{ matrix.scope }}.dockerfile .
+
       - name: Log in to the registry
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ secrets.CICD_ACTOR }}
           password: ${{ secrets.CICD_TOKEN }}
-
-
-      - name: Run Build Docker Image
-        run: docker build --build-arg PLATFORM=${{ matrix.scope }} --build-arg VERSION=${{ github.sha }} -t ghcr.io/aggregain/dify-plugin-daemon:main-${{steps.short-sha.outputs.sha}} -f ./docker/${{ matrix.scope }}.dockerfile .
 
       - name: Push Docker Image
         if: github.event_name != 'pull_request'
